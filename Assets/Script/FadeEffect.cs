@@ -6,16 +6,8 @@ using UnityEngine.SceneManagement;
 public class FadeEffect : MonoBehaviour
 {
     public static FadeEffect Instance;
-    public GameObject fadeobj;      // 검정색 이미지
+    public Image fadeImage;
     public float fadeSpeed = 1.5f;
-
-    public GameObject fadeManager;
-
-    void Start()
-    {
-        
-    }
-
 
     void Awake()
     {
@@ -23,55 +15,58 @@ public class FadeEffect : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
-        if (!fadeManager.gameObject.activeSelf)
-            fadeManager.gameObject.SetActive(true);
     }
 
-    public void FadeToScene(string sceneName, int fadeindex)
+    void Start()
     {
-        switch (fadeindex)
-        {
-            case 0:
-                StartCoroutine(FadeIn(sceneName));
-                break;
-            case 1:
-                StartCoroutine(FadeOut(sceneName));
-                break;
-            
-        }
+        // 처음에는 검은 화면에서 시작
+        if (fadeImage != null)
+            fadeImage.color = new Color(0, 0, 0, 1);
+        StartCoroutine(FadeIn());
     }
 
-    IEnumerator FadeIn(string sceneName)
+    public void FadeToScene(string sceneName)
     {
-        Image fadeimage = fadeobj.GetComponent<Image>();
-        float alpha = 1f;
-        while (alpha > 0f)
-        {
-            alpha -= Time.deltaTime * fadeSpeed;
-            fadeimage.color = new Color(0, 0, 0, alpha);
-            yield return null;
-        }
-
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(FadeOut(sceneName));
     }
 
     IEnumerator FadeOut(string sceneName)
     {
-        Image fadeimage = fadeobj.GetComponent<Image>();
         float alpha = 0f;
         while (alpha < 1f)
         {
             alpha += Time.deltaTime * fadeSpeed;
-            fadeimage.color = new Color(0, 0, 0, alpha);
+            if (fadeImage != null)
+                fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
 
         SceneManager.LoadScene(sceneName);
     }
-}
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    IEnumerator FadeIn()
+    {
+        float alpha = 1f;
+        if (fadeImage != null)
+            fadeImage.color = new Color(0, 0, 0, alpha);
+
+        while (alpha > 0f)
+        {
+            alpha -= Time.deltaTime * fadeSpeed;
+            if (fadeImage != null)
+                fadeImage.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+    }
+}

@@ -8,7 +8,6 @@ public class GameScenesMove : MonoBehaviour
 
     public void GameScenesCtrl()
     {
-        fadeEffect.FadeToScene("InGame", 1);
+        fadeEffect.FadeToScene("InGame");
     }
 }
-
