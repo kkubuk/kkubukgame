@@ -9,14 +9,19 @@ public class NameSet : MonoBehaviour
     public TMP_InputField nicknameInputField;
     public GameObject nicknamePanel;
     public string nextSceneName = "MainGame";
+    public GameObject fadePanel; // ✅ 추가
+    private Image fadeImage;
 
     void Start()
     {
         nicknamePanel.SetActive(true);
+        fadeImage = fadePanel.GetComponent<Image>();
     }
 
     public void OnConfirmButton()
     {
+        if (nicknameInputField == null) return;
+
         string nickname = nicknameInputField.text;
 
         if (string.IsNullOrEmpty(nickname))
@@ -29,8 +34,24 @@ public class NameSet : MonoBehaviour
         PlayerPrefs.Save();
 
         nicknamePanel.SetActive(false);
+        StartCoroutine(FadeOutAndLoad(nextSceneName));
+    }
 
-        // ✅ 페이드 아웃 후 전환
-        FadeEffect.Instance.FadeToScene(nextSceneName);
+    private IEnumerator FadeOutAndLoad(string sceneName)
+    {
+        fadePanel.SetActive(true);
+        Color alpha = fadeImage.color;
+        float time = 0f;
+        float duration = 0.7f;
+
+        while (alpha.a < 1f)
+        {
+            time += Time.deltaTime / duration;
+            alpha.a = Mathf.Lerp(0f, 1f, time);
+            fadeImage.color = alpha;
+            yield return null;
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
 }
