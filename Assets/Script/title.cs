@@ -12,17 +12,19 @@ public class title : MonoBehaviour
     private float ftime;
     private float time;
     public GameObject fadepannel;
-    public void UiSoundPlay()
-    {
-        SoundManager.instance.UIPlay("UiClik", clip);
-    }
+
     // Start is called before the first frame update
     private void Start()
     {
         this.fadepannel = GameObject.Find("Canvas").transform.Find("fade").gameObject;
     }
 
-    public void OCB() => this.StartCoroutine(this.FadeOut());
+    public void OCB()
+    {
+        UiSoundPlay();
+        this.StartCoroutine(this.FadeOut());
+        
+    } 
 
     public IEnumerator FadeOut()
     {
@@ -52,5 +54,11 @@ public class title : MonoBehaviour
     void Update()
     {
 
+    }
+    
+
+    public void UiSoundPlay()
+    {
+        SoundManager.instance.UIPlay("UiClik", clip);
     }
 }
