@@ -21,9 +21,10 @@ public class title : MonoBehaviour
 
     public void OCB()
     {
+        UiSoundPlay();
         this.StartCoroutine(this.FadeOut());
-    }
-
+        
+    } 
 
     public IEnumerator FadeOut()
     {
@@ -54,5 +55,4 @@ public class title : MonoBehaviour
     {
 
     }
-
 }
