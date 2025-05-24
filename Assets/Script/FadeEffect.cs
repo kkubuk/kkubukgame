@@ -49,12 +49,6 @@ public class FadeEffect : MonoBehaviour
 
         SceneManager.LoadScene(sceneName);
     }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        StartCoroutine(FadeIn());
-    }
-
     IEnumerator FadeIn()
     {
         float alpha = 1f;
@@ -69,4 +63,10 @@ public class FadeEffect : MonoBehaviour
             yield return null;
         }
     }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    
 }
