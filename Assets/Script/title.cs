@@ -21,7 +21,7 @@ public class title : MonoBehaviour
 
     public void OCB()
     {
-        UiSoundPlay();
+        SoundManager.instance.OnClickSound(clip);
         this.StartCoroutine(this.FadeOut());
         
     } 
