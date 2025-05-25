@@ -23,8 +23,8 @@ public class title : MonoBehaviour
     {
         SoundManager.instance.OnClickSound(clip);
         this.StartCoroutine(this.FadeOut());
-        
-    } 
+
+    }
 
     public IEnumerator FadeOut()
     {
@@ -54,5 +54,9 @@ public class title : MonoBehaviour
     void Update()
     {
 
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
