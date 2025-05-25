@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
+    public AudioMixer audioSet;
     public AudioSource bgSound;
     public AudioClip[] bglist;
     public static SoundManager instance;
@@ -24,6 +25,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void VolumeSet(float volumesetting)
+    {
+        audioSet.SetFloat("VolumeSet", Mathf.Log10(volumesetting)*20);
+    }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         for (int i = 0; i < bglist.Length; i++)
@@ -41,6 +46,7 @@ public class SoundManager : MonoBehaviour
         GameObject go = new GameObject(uiName + "UISound");
         AudioSource audiosource = go.AddComponent<AudioSource>();
         audiosource.clip = clip;
+        audiosource.outputAudioMixerGroup = audioSet.FindMatchingGroups("sfx")[0];
         audiosource.Play();
 
         Destroy(go, clip.length);
@@ -48,9 +54,11 @@ public class SoundManager : MonoBehaviour
 
     public void BgSoundPlay(AudioClip clip)
     {
+        bgSound.outputAudioMixerGroup = audioSet.FindMatchingGroups("background")[0];
         bgSound.clip = clip;
         bgSound.loop = true;
         bgSound.volume = 0.1f;
+        
         bgSound.Play();
     }
 

@@ -106,22 +106,45 @@ public class nameselect : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
-        nameselect nameselect = this;
-        nameselect.ftime = 0.7f;
-        nameselect.time = 0.0f;
-        nameselect.fadesr = this.fadepannel.GetComponent<Image>();
-        Color alpha = this.fadesr.color;
-        while ((double)alpha.a > 0.0)
+        this.ftime = 0.7f;
+        this.time = 0.0f;
+
+    // 🔽 helppannel의 이미지 가져오기
+        Image helpImage = this.helppannel.GetComponent<Image>();
+        Color helpAlpha = helpImage.color;
+
+    // 🔽 점점 투명하게
+        while ((double)helpAlpha.a > 0.0)
         {
-            nameselect.time += Time.deltaTime / nameselect.ftime;
-            alpha.a = Mathf.Lerp(1f, 0.0f, nameselect.time);
-            nameselect.fadesr.color = alpha;
-            yield return (object)null;
+            this.time += Time.deltaTime / this.ftime;
+            helpAlpha.a = Mathf.Lerp(1f, 0.0f, this.time);
+            helpImage.color = helpAlpha;
+            yield return null;
         }
-        nameselect.helppannel.gameObject.SetActive(false);
-        yield return (object)null;
-        nameselect.StartCoroutine(nameselect.scene());
+
+        this.helppannel.SetActive(false);
+
+    // fadepannel을 다시 불러서 장면 전환 연출도 함께
+        this.fadepannel.SetActive(true);
+        this.fadesr = this.fadepannel.GetComponent<Image>();
+        Color fadeAlpha = this.fadesr.color;
+        fadeAlpha.a = 0f;
+        this.fadesr.color = fadeAlpha;
+
+        this.time = 0.0f;
+
+        while ((double)fadeAlpha.a < 1.0)
+        {
+            this.time += Time.deltaTime / this.ftime;
+            fadeAlpha.a = Mathf.Lerp(0f, 1f, this.time);
+            this.fadesr.color = fadeAlpha;
+            yield return null;
+        }
+
+    // 씬 전환
+        StartCoroutine(this.scene());
     }
+
 
     public IEnumerator FadeIn()
     {
