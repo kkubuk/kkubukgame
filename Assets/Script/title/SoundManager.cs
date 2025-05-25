@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -25,22 +26,32 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void VolumeSet(float volumesetting)
+    public void backgroundVolumeSet(float volumesetting)
     {
-        audioSet.SetFloat("VolumeSet", Mathf.Log10(volumesetting)*20);
+        audioSet.SetFloat("background", Mathf.Log10(volumesetting)*20);
+    }
+    public void sfxVolumeSet(float volumesetting)
+    {
+        audioSet.SetFloat("sfx", Mathf.Log10(volumesetting)*20);
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
+        bool found = false;
+
         for (int i = 0; i < bglist.Length; i++)
         {
             if (arg0.name == bglist[i].name)
-                BgSoundPlay(bglist[i]);
-            else
             {
-                bgSound.Stop();
+                BgSoundPlay(bglist[i]);
+                found = true;
+                break;
             }
         }
+        if (!found)
+            bgSound.Stop();
     }
+
+
     public void UIPlay(string uiName, AudioClip clip)
     {
         GameObject go = new GameObject(uiName + "UISound");
