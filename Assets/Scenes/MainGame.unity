@@ -547,8 +547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.6816, y: -291.758}
-  m_SizeDelta: {x: 742.8228, y: 65.9422}
+  m_AnchoredPosition: {x: -5.9682, y: -300.3963}
+  m_SizeDelta: {x: 747.3961, y: 83.2188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &846061810
 GameObject:
@@ -717,7 +717,7 @@ MonoBehaviour:
   dialoguePanelRect: {fileID: 1436395966}
   nameText: {fileID: 846061813}
   dialogueText: {fileID: 761430626}
-  csvFile: {fileID: 4900000, guid: f35f42cee86375c4798cdf5dd0cd0241, type: 3}
+  csvFile: {fileID: 4900000, guid: f7f3985a441829f45ad5239a5081c709, type: 3}
   characterImage: {fileID: 319072980}
   characterImages:
   - characterName: "\uC5F0\uD76C"
