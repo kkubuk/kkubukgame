@@ -1,60 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-#nullable disable
 public class title : MonoBehaviour
 {
     public AudioClip clip;
-    private Image fadesr;
-    private float ftime;
-    private float time;
-    public GameObject fadepannel;
 
-    // Start is called before the first frame update
+    // Start에서는 더 이상 fadepannel을 찾지 않으므로 빈 채워둡니다.
     private void Start()
     {
-        this.fadepannel = GameObject.Find("Canvas").transform.Find("fade").gameObject;
+        // (이전에는 페이드 패널을 찾았지만 지금은 사용하지 않습니다.)
     }
 
+    // 버튼 클릭 시 호출되는 함수
     public void OCB()
     {
+        // 클릭 사운드는 재생하고
         SoundManager.instance.OnClickSound(clip);
-        this.StartCoroutine(this.FadeOut());
 
+        // 곧바로 VideoTransitionScene → InGame 으로 넘어가도록 호출
+        TransitionManager.LoadSceneWithVideo("InGame");
     }
 
-    public IEnumerator FadeOut()
-    {
-        title title = this;
-        title.ftime = 0.7f;
-        title.time = 0.0f;
-        title.fadepannel.gameObject.SetActive(true);
-        title.fadepannel.transform.SetAsLastSibling();
-        title.fadesr = title.fadepannel.GetComponent<Image>();
-        Color alpha = title.fadesr.color;
-        while ((double)alpha.a < 1.0)
-        {
-            title.time += Time.deltaTime / title.ftime;
-            alpha.a = Mathf.Lerp(0.0f, 1f, title.time);
-            title.fadesr.color = alpha;
-            yield return (object)null;
-        }
-        title.StartCoroutine(title.scene());
-    }
+    // Update는 사용되지 않으므로 비워둡니다.
+    void Update() { }
 
-    public IEnumerator scene()
-    {
-        SceneManager.LoadScene("InGame");
-        yield return (object)null;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Exit()
     {
         Application.Quit();

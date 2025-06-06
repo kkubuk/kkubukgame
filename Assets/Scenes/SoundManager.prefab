@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50997bb7053f7984c9d20186a31884fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSet: {fileID: 24100000, guid: cd7b362847da57947b8af15946217562, type: 2}
   bgSound: {fileID: 4306989486732841623}
   bglist:
   - {fileID: 8300000, guid: 3fbd99db94b453f48a750d2f3d664812, type: 3}
+  - {fileID: 8300000, guid: ea62a820eb6ec3e4cb9409fcaccef266, type: 3}
   buttonSound: {fileID: 8300000, guid: 8dd4a2015fcfab54e885b9299849b98a, type: 3}
 --- !u!82 &4306989486732841623
 AudioSource:
@@ -58,7 +60,7 @@ AudioSource:
   m_GameObject: {fileID: 6761765465588285444}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3401933421434575480, guid: cd7b362847da57947b8af15946217562, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

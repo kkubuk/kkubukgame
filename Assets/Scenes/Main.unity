@@ -3016,10 +3016,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4306989486732841623, guid: abd674befc9ed294896dde48b4fc8ba6, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -3401933421434575480, guid: cd7b362847da57947b8af15946217562, type: 2}
     - target: {fileID: 4852111360146306687, guid: abd674befc9ed294896dde48b4fc8ba6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 624.4299
@@ -3064,18 +3060,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8753090928252367385, guid: abd674befc9ed294896dde48b4fc8ba6, type: 3}
-      propertyPath: audioSet
-      value: 
-      objectReference: {fileID: 24100000, guid: cd7b362847da57947b8af15946217562, type: 2}
-    - target: {fileID: 8753090928252367385, guid: abd674befc9ed294896dde48b4fc8ba6, type: 3}
-      propertyPath: bglist.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8753090928252367385, guid: abd674befc9ed294896dde48b4fc8ba6, type: 3}
-      propertyPath: bglist.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: ea62a820eb6ec3e4cb9409fcaccef266, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
